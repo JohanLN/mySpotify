@@ -1,13 +1,15 @@
+import { counterConstants } from '../constants/counterConstants';
+
 export const increment = (number) => {
     return {
-        type: "INCREMENT",
+        type: counterConstants.INCREMENT,
         playload: number
     };
 };
 
 export const decrement = (number) => {
     return {
-        type: "DECREMENT",
+        type: counterConstants.DECREMENT,
         playload: number
     };
 };

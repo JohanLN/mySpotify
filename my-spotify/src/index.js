@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
-import allReducers from './redux/reducers/index';
+import { storage } from './redux/store';
 import { Provider } from 'react-redux';
-
-const storage = createStore(
-  allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+import Root from './router';
 
 ReactDOM.render(
   <Provider store={storage}>
-    <App />
+    <Root/>
   </Provider>,
   document.getElementById('root')
 );

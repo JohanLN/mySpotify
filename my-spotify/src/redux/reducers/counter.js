@@ -1,12 +1,14 @@
-const counterReducer = (state = 0, action) => {
+import { counterConstants } from "../constants/counterConstants"
+
+const counterReducers = (state = 0, action) => {
     switch (action.type) {
-        case "INCREMENT":
+        case counterConstants.INCREMENT:
             return state + action.playload;
-        case "DECREMENT":
+        case counterConstants.DECREMENT:
             return state - action.playload;
         default:
             return state;
     };
 };
 
-export default counterReducer;
+export default counterReducers;

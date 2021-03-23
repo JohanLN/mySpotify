@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import { getTokenFromURL } from '../../redux/services/services';
-import { useDispatch } from 'react-redux';
-import { saveAccessToken } from '../../redux/actions/userCredentialAction';
+import { useSelector } from 'react-redux';
 
 
 const Home = () => {
 
-    const dispatch = useDispatch();
-    const access_token = getTokenFromURL().access_token;
-    dispatch(saveAccessToken(access_token));
+    const access_token = useSelector(state => state.userCredentialsReducer);
 
     return (
         <div className="Home" style={{display: 'flex', flexDirection: 'column', backgroundColor: 'pink'}}>

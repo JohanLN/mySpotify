@@ -1,12 +1,5 @@
 import { userCredentialsConstant } from '../constants/userCredentials';
-
-export const saveAccessToken = (access_token) => {
-    console.log("Dispatch ", access_token);
-    return {
-        type: userCredentialsConstant.SAVE,
-        playload: access_token
-    };
-};
+import { getTokenFromURL } from '../../redux/services/services';
 
 export const deleteAccessToken = () => {
     return {
@@ -14,9 +7,10 @@ export const deleteAccessToken = () => {
     };
 };
 
-export const modifyAccessToken = (access_token) => {
+export const getAccessToken = () => {
+    const access_token = getTokenFromURL().access_token;
     return {
-        type: userCredentialsConstant.MODIFY,
+        type: userCredentialsConstant.GET,
         playload: access_token
     }
 }

@@ -1,10 +1,8 @@
-import counterReducers from './counter';
-import userCredentialsReducer from './userCredentialsReducer'
+import userCredentialsReducer from './userCredentialsReducer';
 import { combineReducers } from 'redux';
 
 const rootReducers = combineReducers({
-    counterReducers: counterReducers,
-    userCredentialsReducer: userCredentialsReducer
+    userCredentialsReducer: userCredentialsReducer,
 });
 
 export default rootReducers;

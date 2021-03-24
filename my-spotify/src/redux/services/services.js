@@ -23,7 +23,6 @@ export const getTokenFromURL = (dispatch) => {
       .reduce((initial, item) => {
         var parts = item.split("=");
         initial[parts[0]] = decodeURIComponent(parts[1]);
-        console.log("response ? ", initial);
         return initial;
       }, {});
   };

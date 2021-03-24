@@ -1,5 +1,4 @@
 export const userCredentialsConstant = {
-    SAVE: "SAVE",
-    DELETE: "DELETE",
-    MODIFY: "MODIFY"
+    GET: "GET_ACCESS_TOKEN",
+    DELETE: "DELETE_ACCESS_TOKEN",
 };

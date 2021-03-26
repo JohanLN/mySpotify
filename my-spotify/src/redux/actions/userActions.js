@@ -10,8 +10,6 @@ export const getTokenFromURL = () => {
             initial[parts[0]] = decodeURIComponent(parts[1]);
             return initial;
     }, {});
-
-    console.log("test on getToken", access_token);
     return {
         type: userConst.GET_ACCESS_TOKEN,
         payload: access_token.access_token
@@ -19,7 +17,6 @@ export const getTokenFromURL = () => {
 };
 
 export const getUser = (access_token) => {
-    console.log("TESSSSSSSSSSSSSSSSSSSSSST!", access_token)
     return (dispatch) => {
         axios.get("https://api.spotify.com/v1/me", {
             headers: {
@@ -27,7 +24,6 @@ export const getUser = (access_token) => {
                 'Authorization': 'Bearer ' + access_token
             }
         }).then(response => {
-            console.log("SUCCESS", response.data)
             dispatch({
                 type: userConst.GET_USER,
                 payload: response.data

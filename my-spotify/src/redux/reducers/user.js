@@ -2,7 +2,7 @@ import { userConst } from '../constants/constants';
 
 let initialState = {
     access_token: "",
-    userData: ""
+    userData: {}
 };
 
 const user = (state = initialState, action) => {

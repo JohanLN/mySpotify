@@ -18,6 +18,12 @@ class Welcome extends React.Component {
     }
   };
 
+  componentDidUpdate() {
+    if (this.props.user.access_token !== "" && this.props.user.userData.display_name === undefined) {
+      this.props.getUser(this.props.user.access_token);
+    }
+  }
+
   _signOut() {
     this.props.signOut();
     this.props.history.push("/");
@@ -25,6 +31,7 @@ class Welcome extends React.Component {
   }
 
   render() {
+    console.log(this.props.user)
     return (
       <div className="Welcome" style={{display: 'flex', flexDirection: 'column', backgroundColor: "#FFAF65"}}>
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: 'rgba(0,0,0,0.4)', alignItems: 'center'}}>
@@ -34,7 +41,7 @@ class Welcome extends React.Component {
             {this.props.user.access_token !== "" ? 
               <Button onClick={() => {this._signOut()}} variant="outlined" style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: "80%", height: 38, fontWeight: 'bold', color: "white", borderColor: 'white', borderRadius: 50, borderWidth: 3}}>
                 <AccountCircle style={{fontSize: 40}} color="primary" />
-                <h4>Username</h4>
+                <h4 style={{fontSize: 10}}>{this.props.user.userData.display_name}</h4>
               </Button>
                 :
               <Button href={signIn()} variant="outlined" style={{width: "80%", fontWeight: 'bold', color: "white", borderColor: 'white', borderRadius: 50, borderWidth: 3}}>

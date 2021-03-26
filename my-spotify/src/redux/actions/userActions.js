@@ -18,7 +18,8 @@ export const getTokenFromURL = () => {
     };
 };
 
-export const getUsername = (access_token) => {
+export const getUser = (access_token) => {
+    console.log("TESSSSSSSSSSSSSSSSSSSSSST!", access_token)
     return (dispatch) => {
         axios.get("https://api.spotify.com/v1/me", {
             headers: {
@@ -26,13 +27,13 @@ export const getUsername = (access_token) => {
                 'Authorization': 'Bearer ' + access_token
             }
         }).then(response => {
-            console.log("SUCCESS", response)
+            console.log("SUCCESS", response.data)
             dispatch({
                 type: userConst.GET_USER,
-                payload: response.data.display_name
+                payload: response.data
             })
         }).catch(err => {
-            console.log("ERROR", err)
+            console.log("ERROR", err.message)
         })    
     };
 };

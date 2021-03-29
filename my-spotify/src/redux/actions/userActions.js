@@ -27,12 +27,66 @@ export const getUser = (access_token) => {
             dispatch({
                 type: userConst.GET_USER,
                 payload: response.data
-            })
+            });
         }).catch(err => {
-            console.log("ERROR", err.message)
+            console.log("ERROR GET_USER", err.message)
         })    
     };
 };
+
+export const getUserPlaylists = (access_token) => {
+    return (dispatch) => {
+        axios.get('https://api.spotify.com/v1/me/playlists', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.GET_USER_PLAYLIST,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR GET_USER_PLAYLIST :", err)
+        });
+    };
+};
+
+export const getUserRecentlyPlayed = (access_token) => {
+    return (dispatch) => {
+        axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=5', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.GET_USER_RECENTLY_PLAYED,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR GET_USER_RECENTLY_PLAYED :", err)
+        });
+    };
+};
+
+export const searchTrack = (access_token, search) => {
+    return (dispatch) => {
+        axios.get('https://api.spotify.com/v1/search?q=' + search + "&type=track&market=US", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.SEARCH,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR GET_USER_RECENTLY_PLAYED :", err)
+        });
+    }
+}
 
 export const signOut = () => {
     return {

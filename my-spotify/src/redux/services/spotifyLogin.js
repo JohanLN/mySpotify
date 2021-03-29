@@ -2,7 +2,10 @@ import { spotifyConst } from "../constants/constants";
 
 const scopes = [
     "user-read-private",
-    "user-read-email"
+    "user-read-email",
+    "playlist-read-private",
+    "user-read-recently-played"
+
 ]
 
 export const signIn = () => {

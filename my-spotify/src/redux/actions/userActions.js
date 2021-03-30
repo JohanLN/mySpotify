@@ -101,7 +101,6 @@ export const getUserRecentlyPlayed = (access_token) => {
 };
 
 export const searchTrack = (access_token, search) => {
-    console.log("API", search)
     return (dispatch) => {
         axios.get('https://api.spotify.com/v1/search?q=' + search + "&type=track&market=US", {
             headers: {

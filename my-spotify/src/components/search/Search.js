@@ -34,14 +34,14 @@ class Search extends React.Component {
 
                 <HomeHeader props={this.props} />
 
-                <div id="SearchBody" style={{backgroundColor: 'rgba(22, 22, 22, 78%)', width: "90%", marginLeft: "10%", display: 'flex', flexDirection: 'column'}}>
+                <div style={{backgroundColor: 'rgba(22, 22, 22, 78%)', width: "90%", marginLeft: "10%", display: 'flex', flexDirection: 'column'}}>
                     <div style={{alignSelf: 'center', width: "50%", position: 'fixed', marginTop: "1%"}}>
                         <Input placeholder="Search for tracks" onChange={(text) => {
                             this.setState({search: text.target.value})
                             this.props.searchTrack(this.props.user.access_token, text.target.value)
                         }} style={{width: "100%", backgroundColor: 'white', borderRadius: 50, padding: 10}}/>
                     </div>
-                    <div style={{marginTop: "5%"}}>
+                    <div style={{marginTop: "5%", display: 'flex', flexDirection: 'column'}}>
                         {this.displaySearchedTracks(searches)}
                     </div>           
                 </div>

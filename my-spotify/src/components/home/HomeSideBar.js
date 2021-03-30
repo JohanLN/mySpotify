@@ -23,7 +23,11 @@ class HomeSideBar extends React.Component {
                         <Home style={{fontSize: 40}} color="primary"/>
                         Home
                     </Button>
-                    <Button onClick={() => this.props.props.history.push("/Home/Search")} variant="text" color='primary' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: "100%"}}>
+                    <Button onClick={() => {
+                        if (this.props.props.history.location.pathname !== "/Home/Search") {
+                            this.props.props.history.push("/Home/Search")
+                        }
+                    }} variant="text" color='primary' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: "100%"}}>
                         <Search style={{fontSize: 40}} color="primary"/>
                         Search
                     </Button>
@@ -32,7 +36,11 @@ class HomeSideBar extends React.Component {
                         Playlists
                     </Button>
                 </div>
-                <Button onClick={() => this.props.props.history.push("/Home/MusicPlayer")} variant="text" color='primary' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: "100%", marginTop: 750}}>
+                <Button onClick={() => {
+                        if (this.props.props.history.location.pathname !== "/Home/MusicPlayer") {
+                            this.props.props.history.push("/Home/MusicPlayer")
+                        }
+                    }} variant="text" color='primary' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: "100%", marginTop: 750}}>
                     <PlayCircleFilled style={{fontSize: 40}} color="primary"/>
                         Player
                 </Button>

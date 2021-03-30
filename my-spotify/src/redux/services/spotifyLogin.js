@@ -4,8 +4,8 @@ const scopes = [
     "user-read-private",
     "user-read-email",
     "playlist-read-private",
-    "user-read-recently-played"
-
+    "user-read-recently-played",
+    "user-top-read"
 ]
 
 export const signIn = () => {

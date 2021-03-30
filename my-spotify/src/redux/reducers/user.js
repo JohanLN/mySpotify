@@ -3,6 +3,7 @@ import { userConst } from '../constants/constants';
 let initialState = {
     access_token: "",
     userData: {},
+    userDataTops: {},
     userPlaylistData: {},
     userRecentlyPlayed: {},
     searches: {}
@@ -18,7 +19,10 @@ const user = (state = initialState, action) => {
         case userConst.DELETE_ACCESS_TOKEN:
             return {
                 ...state,
-                access_token: ""
+                access_token: "",
+                userData: {},
+                userPlaylistData: {},
+                searches: {}
             }
         case userConst.GET_USER:
             return {
@@ -39,6 +43,11 @@ const user = (state = initialState, action) => {
             return {
                 ...state,
                 searches: action.payload
+            }
+        case userConst.GET_USER_TOPS:
+            return {
+                ...state,
+                userDataTops: action.payload
             }
         default:
             return {

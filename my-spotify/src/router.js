@@ -5,6 +5,8 @@ import Welcome from './components/app/Welcome';
 import Profile from './components/user_profile/Profile';
 import Search from './components/search/Search';
 import TrackInfos from './components/infos_component/TrackInfos';
+import PlaylistInfos from './components/infos_component/PlaylistInfos';
+import ArtistInfos from './components/infos_component/ArtistInfos';
 
 const Root = () => {
 
@@ -17,6 +19,8 @@ const Root = () => {
                 <Route exact path="/Home/Search" component={Search} />
                 <Route exact path="/Home/MusicPlayer" component={MusicPlayer} />
                 <Route path="/Home/Search/TrackInfos/:id" component={TrackInfos} />
+                <Route path="/Home/Search/PlaylistInfos/:id" component={PlaylistInfos} />
+                <Route path="/Home/Search/ArtistInfos/:id" component={ArtistInfos} />
             </Switch>
         </Router>
     );

@@ -136,7 +136,7 @@ export const selectedTrack = (access_token, trackId) => {
     }
 }
 
-export const getAtistAlbums = (access_token, artistId) => {
+export const getAtistTopTracks = (access_token, artistId) => {
     return (dispatch) => {
         axios.get("https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?market=FR", {
             headers: {
@@ -145,11 +145,60 @@ export const getAtistAlbums = (access_token, artistId) => {
             }
         }).then(response => {
             dispatch({
-                type: userConst.ARTIST_ALBUMS,
+                type: userConst.GET_ARTIST_TOP_TRACKS,
                 payload: response.data
             });
         }).catch(err => {
-            console.log("ERROR ARTIST_ALBUMS :", err)
+            console.log("ERROR GET_ARTIST_TOP_TRACKS :", err)
+        });
+    }
+}
+
+export const getPlaylist = (access_token, playlistId) => {
+    return (dispatch) => {
+        axios.get("https://api.spotify.com/v1/playlists/" + playlistId + "?market=FR", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.GET_PLAYLIST,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR GET_ARTIST_TOP_TRACKS :", err)
+        });
+    }
+}
+
+export const getArtist = (access_token, artistId) => {
+    let datas = {artistData: {}, artistTracks: {}};
+    return (dispatch) => {
+        axios.get("https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?market=FR", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            datas.artistTracks = response.data
+        }).catch(err => {
+            console.log("ERROR GET_ARTIST_TOP_TRACKS :", err)
+        });
+        axios.get("https://api.spotify.com/v1/artists/" + artistId, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            datas.artistData = response.data
+            console.log("SUCCESS", datas)
+            dispatch({
+                type: userConst.GET_ARTIST,
+                payload: datas
+            })
+        }).catch(err => {
+            console.log("ERROR GET_ARTIST_TOP_TRACKS :", err)
         });
     }
 }

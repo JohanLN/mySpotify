@@ -29,6 +29,10 @@ class Search extends React.Component {
 
     render() {
 
+        if (this.props.user.access_token === "" ||this.props.user.access_token === undefined) {
+            this.props.history.push("/");
+            window.location.reload(false);
+        }
         const searches = this.props.user.searches;
 
         return (

@@ -9,10 +9,13 @@ class Profile extends React.Component {
 
     displayTopArtists(artists) {
         const list = artists.map(artist => (
-            <div style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "2%"}}>
-                <img src={artist.images[0].url} alt={artist.name} style={{width: "50%", height: "50%", borderRadius: 100, alignSelf: 'center'}} />
-                <p style={{color:"white", fontSize: 19, fontWeight: 'bold'}}>{artist.name}</p>
-                <p style={{color: 'white'}}>{artist.genres[0]}</p>
+            <div onClick={() => {
+                this.props.getArtist(this.props.user.access_token, artist.id);
+                this.props.history.push("/Home/Search/ArtistInfos/"+artist.id)
+            }} style={{display: 'flex', flexDirection: 'column', width: "13%", height: "80%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, marginLeft: "2%"}}>
+                <img src={artist.images[0].url} alt={artist.name} style={{width: "70%", height: "60%", borderRadius: 5, alignSelf: 'center', marginTop: '5%'}} />
+                <p style={{fontWeight: 'bold', fontSize: 19, color: 'white', marginLeft: "15%"}}>{artist.name}</p>
+                <p style={{color: 'white', fontSize: 14, marginLeft: "15%"}}>{artist.genres[0]}</p>
             </div>
         ))
         return (list);
@@ -20,7 +23,10 @@ class Profile extends React.Component {
 
     displayTopTracks(tracks) {
         const list = tracks.map(track => (
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: "79%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "2%", marginBottom: "1%"}}>
+            <div onClick={() => {
+                this.props.selectedTrack(this.props.user.access_token ,track.id)
+                this.props.history.push("/Home/Search/TrackInfos/"+track.id)
+            }} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: "79%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "2%", marginBottom: "1%"}}>
                 <div style={{display: 'flex', flexDirection: 'row', width: "15%"}}>
                     <img src={track.album.images[0].url} alt={track.name} style={{width: "40%"}} />
                     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', marginLeft: "5%"}}>
@@ -37,7 +43,10 @@ class Profile extends React.Component {
 
     displayUserPlaylist(userPlaylist) {
         const list = userPlaylist.map(playlist => (
-            <div style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "2%"}}>
+            <div onClick={() => {
+                this.props.getPlaylist(this.props.user.access_token, playlist.id);
+                this.props.history.push("/Home/Search/PlaylistInfos/"+playlist.id);
+            }} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "2%"}}>
                 <img src={playlist.images[0].url} alt={playlist.name} style={{width: "70%", height: "70%", borderRadius: 100, alignSelf: 'center'}} />
                 <p style={{color:"white", fontSize: 19, fontWeight: 'bold'}}>{playlist.name}</p>
         </div>
@@ -47,8 +56,10 @@ class Profile extends React.Component {
 
     render() {
 
-        console.log("Profile",this.props.user.userDataTops.tracks)
-
+        if (this.props.user.access_token === "" ||this.props.user.access_token === undefined) {
+            this.props.history.push("/");
+            window.location.reload(false);
+        }
         const artists = this.props.user.userDataTops.artists.items;
         const tracks = this.props.user.userDataTops.tracks.items;
         const userPlaylist = this.props.user.userPlaylistData.items;

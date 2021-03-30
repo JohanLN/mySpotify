@@ -4,6 +4,10 @@ import * as actions from '../../redux/actions/userActions';
 
 class MusicPlayer extends React.Component {
     render() {
+        if (this.props.user.access_token === "" ||this.props.user.access_token === undefined) {
+            this.props.history.push("/");
+            window.location.reload(false);
+        }
         return (
             <div className="MusicPlayer" style={{display: 'flex', flexDirection: 'column', backgroundColor: 'green'}}>
                 <h1>MusicPlayer Page</h1>

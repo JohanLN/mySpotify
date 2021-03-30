@@ -36,11 +36,15 @@ class TrackInfos extends React.Component {
 
     render() {
 
+        if (this.props.user.access_token === "" ||this.props.user.access_token === undefined) {
+            this.props.history.push("/");
+            window.location.reload(false);
+        }
         const track = this.props.user.selectedTrack;
-        const topTracks = this.props.user.artistAlbum;
+        const topTracks = this.props.user.topTracks;
 
         if (Object.keys(track).length > 0 && Object.keys(topTracks).length <= 0)
-            this.props.getAtistAlbums(this.props.user.access_token, this.props.user.selectedTrack.artists[0].id)
+            this.props.getAtistTopTracks(this.props.user.access_token, this.props.user.selectedTrack.artists[0].id)
 
         return (
             <div className="TrackInfos" style={{display: 'flex', flexDirection: 'row', minHeight: "100vh",}}>
@@ -55,7 +59,10 @@ class TrackInfos extends React.Component {
                             <div style={{marginLeft: "5%", marginTop: "2%"}}>
                                 <p style={{color: 'white', fontSize: 15}}>{track.album.album_type}</p>
                                 <p style={{color: 'white', fontSize: 60, fontWeight: 'bold'}}>{track.name}</p>
-                                <p style={{color: 'white', fontSize: 30}}>{track.artists[0].name}{track.artists[1] ? ", "+track.artists[1].name : null}</p>
+                                <p onClick={() => {
+                                    this.props.getArtist(this.props.user.access_token, track.artists[0].id);
+                                    this.props.history.push("/Home/Search/ArtistInfos/"+track.artists[0].id)
+                                }} style={{color: 'white', fontSize: 30}}>{track.artists[0].name}{track.artists[1] ? ", "+track.artists[1].name : null}</p>
                             </div>
                             <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-evenly', marginLeft: "25%"}}>
                                 <h1 style={{color: 'white', fontSize: 15}}>Music duration : {this.millisToMinutesAndSeconds(track.duration_ms)}</h1>

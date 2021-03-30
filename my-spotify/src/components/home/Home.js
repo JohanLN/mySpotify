@@ -8,7 +8,10 @@ class Home extends React.Component {
 
     displayUserPlaylist(userPlaylist) {
         const list = userPlaylist.map(playlist => (
-            <div onClick={() => console.log(playlist.name)} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, marginLeft: "1%"}}>
+            <div onClick={() => {
+                this.props.getPlaylist(this.props.user.access_token, playlist.id);
+                this.props.history.push("/Home/Search/PlaylistInfos/"+playlist.id);
+            }} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, marginLeft: "1%"}}>
                 <img src={playlist.images[0].url} alt={playlist.name} style={{width: "70%", height: "70%", borderRadius: 5, alignSelf: 'center', marginTop: '5%'}} />
                 <p style={{color: 'white', fontSize: 17, fontWeight: 'bold', marginLeft: "15%"}}>{playlist.name}</p>
             </div>
@@ -30,13 +33,12 @@ class Home extends React.Component {
         return (list);
     }
 
-    componentDidMount() {
-        if (this.props.user.access_token === "")
-            this.props.history.push("/");
-    }
-
     render() {
 
+        if (this.props.user.access_token === "" ||this.props.user.access_token === undefined) {
+            this.props.history.push("/");
+            window.location.reload(false);
+        }
         const userPlaylist = this.props.user.userPlaylistData.items;
         const userRecentlyPlayed = this.props.user.userRecentlyPlayed.items;
 

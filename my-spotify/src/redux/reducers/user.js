@@ -6,7 +6,9 @@ let initialState = {
     userDataTops: {},
     userPlaylistData: {},
     userRecentlyPlayed: {},
-    searches: {}
+    searches: {},
+    selectedTrack: {},
+    artistAlbum: {}
 };
 
 const user = (state = initialState, action) => {
@@ -48,6 +50,23 @@ const user = (state = initialState, action) => {
             return {
                 ...state,
                 userDataTops: action.payload
+            }
+        case userConst.SELECTED_TRACK:
+            return {
+                ...state,
+                selectedTrack: action.payload
+            }
+        case userConst.ARTIST_ALBUMS:
+            return {
+                ...state,
+                artistAlbum: action.payload
+            }
+        case userConst.CLEAR_SELECTED_TRACK:
+            return {
+                ...state,
+                selectedTrack: {},
+                artistAlbum: {},
+                searches: {}
             }
         default:
             return {

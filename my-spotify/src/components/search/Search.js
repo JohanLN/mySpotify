@@ -13,7 +13,10 @@ class Search extends React.Component {
         }
         const searches = search.tracks.items;
         const list = searches.map(track => (
-            <div onClick={() => console.log(track.name)} style={{display: 'flex', flexDirection: 'row', height: "2%", margin: "2%", paddingBottom: "2%", borderBottom: "1px solid white"}}>
+            <div onClick={() => {
+                this.props.selectedTrack(this.props.user.access_token ,track.id)
+                this.props.history.push("/Home/Search/TrackInfos/"+track.id)
+            }} style={{display: 'flex', flexDirection: 'row', height: "2%", margin: "2%", paddingBottom: "2%", borderBottom: "1px solid white"}}>
                 <img src={track.album.images[0].url} alt={track.name} style={{height: "100%"}} />
                 <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', marginLeft: 100}}>
                     <h1 style={{color: 'white'}}>{track.name}</h1>

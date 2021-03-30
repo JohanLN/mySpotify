@@ -102,7 +102,7 @@ export const getUserRecentlyPlayed = (access_token) => {
 
 export const searchTrack = (access_token, search) => {
     return (dispatch) => {
-        axios.get('https://api.spotify.com/v1/search?q=' + search + "&type=track&market=US", {
+        axios.get('https://api.spotify.com/v1/search?q=' + search + "&type=track&market=FR", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token
@@ -113,8 +113,50 @@ export const searchTrack = (access_token, search) => {
                 payload: response.data
             });
         }).catch(err => {
-            console.log("ERROR GET_USER_RECENTLY_PLAYED :", err)
+            console.log("ERROR SEARCH :", err)
         });
+    }
+}
+
+export const selectedTrack = (access_token, trackId) => {
+    return (dispatch) => {
+        axios.get('https://api.spotify.com/v1/tracks/' + trackId, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.SELECTED_TRACK,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR SELECTED_TRACK :", err)
+        });
+    }
+}
+
+export const getAtistAlbums = (access_token, artistId) => {
+    return (dispatch) => {
+        axios.get("https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?market=FR", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        }).then(response => {
+            dispatch({
+                type: userConst.ARTIST_ALBUMS,
+                payload: response.data
+            });
+        }).catch(err => {
+            console.log("ERROR ARTIST_ALBUMS :", err)
+        });
+    }
+}
+
+export const clearSlectedTrack = () => {
+    return {
+        type: userConst.CLEAR_SELECTED_TRACK,
     }
 }
 

@@ -8,9 +8,9 @@ class Home extends React.Component {
 
     displayUserPlaylist(userPlaylist) {
         const list = userPlaylist.map(playlist => (
-            <div onClick={() => console.log(playlist.name)} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "1%"}}>
-                <img src={playlist.images[0].url} alt={playlist.name} style={{width: "70%", height: "70%", borderRadius: 100, alignSelf: 'center'}} />
-                <p style={{color: 'white', fontSize: 17, fontWeight: 'bold'}}>{playlist.name}</p>
+            <div onClick={() => console.log(playlist.name)} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, marginLeft: "1%"}}>
+                <img src={playlist.images[0].url} alt={playlist.name} style={{width: "70%", height: "70%", borderRadius: 5, alignSelf: 'center', marginTop: '5%'}} />
+                <p style={{color: 'white', fontSize: 17, fontWeight: 'bold', marginLeft: "15%"}}>{playlist.name}</p>
             </div>
         ));
         return (list);
@@ -18,10 +18,13 @@ class Home extends React.Component {
 
     displayUserRecentlyPlayed(userRecentlyPlayed) {
         const list = userRecentlyPlayed.map(recentTrack => (
-            <div onClick={() => console.log(recentTrack.track.name)} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, padding: 10, marginLeft: "1%"}}>
-                <p style={{fontWeight: 'bold', fontSize: 22, color: 'white'}}>{recentTrack.track.name}</p>
-                <img src={recentTrack.track.album.images[0].url} alt={recentTrack.track.name} style={{width: "70%", height: "70%", alignSelf: 'center'}} />
-                <p style={{color: 'white', fontSize: 17}}>{recentTrack.track.artists[0].name}</p>
+            <div onClick={() => {
+                this.props.selectedTrack(this.props.user.access_token ,recentTrack.track.id)
+                this.props.history.push("/Home/Search/TrackInfos/"+recentTrack.track.id)
+            }} style={{display: 'flex', flexDirection: 'column', width: "13%", backgroundColor: 'rgba(18, 18, 18, 78%)', borderRadius: 5, marginLeft: "1%"}}>
+                <img src={recentTrack.track.album.images[0].url} alt={recentTrack.track.name} style={{width: "70%", height: "70%", alignSelf: 'center', marginTop: '5%', borderRadius: 5}} />
+                <p style={{fontWeight: 'bold', fontSize: 19, color: 'white', marginLeft: "15%"}}>{recentTrack.track.name}</p>
+                <p style={{color: 'white', fontSize: 14, marginLeft: "15%"}}>{recentTrack.track.artists[0].name}</p>
             </div>
         ));
         return (list);

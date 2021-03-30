@@ -4,7 +4,8 @@ export const userConst = {
     GET_USER: "GET_USER",
     GET_USER_PLAYLIST: "GET_USER_PLAYLIST",
     GET_USER_RECENTLY_PLAYED: "GET_USER_RECENTLY_PLAYED",
-    SEARCH: "SEARCH"
+    SEARCH: "SEARCH",
+    GET_USER_TOPS: "GET_USER_TOPS"
 };
 
 export const spotifyConst = {

@@ -15,4 +15,13 @@ export default createMuiTheme({
         secondary: green
     },
     typography: 'Raleway, Arial',
+    overrides: {
+        MuiButton: {
+            root: {
+                "&:hover": {
+                    backgroundColor: '#e6e6e6'
+                }
+            }
+        }
+    }
 })

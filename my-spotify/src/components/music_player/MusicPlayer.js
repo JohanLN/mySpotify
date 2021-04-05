@@ -11,7 +11,7 @@ const MusicPlayer = (props) => {
     return (
         <div className="MusicPlayer" >
             <h1>MusicPlayer Page</h1>
-            <img src={logo} alt="Track picture"/>
+            <img className="logoPicture" src={logo} alt="Track picture"/>
                  <div className="PlayerBar">
                  <Button  className="skip-btn" onClick={() => props.SkipSong(false)}>
                     <SkipPreviousIcon style={{ fontSize: 100}}/>

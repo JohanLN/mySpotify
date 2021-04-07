@@ -31,10 +31,6 @@ class HomeSideBar extends React.Component {
                         <Search style={{fontSize: 40}} color="primary"/>
                         Search
                     </Button>
-                    <Button variant="text" color='primary' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: "100%"}}>
-                        <List style={{fontSize: 40}} color="primary"/>
-                        Playlists
-                    </Button>
                 </div>
                 <Button onClick={() => {
                         if (this.props.props.history.location.pathname !== "/Home/MusicPlayer") {

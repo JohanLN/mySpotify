@@ -20,7 +20,7 @@ class ArtistInfos extends React.Component {
     }
 
     displayPopularSongs(popularSongs) {
-        if (Object.keys(popularSongs).length <= 0 || popularSongs.length <= 0) {
+        if (Object.keys(popularSongs).length <= 0 || popularSongs.length <= 0 || popularSongs === undefined) {
             return null;
         }
         const list = popularSongs.map(popularSong => (
